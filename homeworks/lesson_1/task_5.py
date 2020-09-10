@@ -18,4 +18,3 @@ elif revenue == loss:
     print("Zero :/")
 elif revenue < loss:
     print("Loss :(")
-
