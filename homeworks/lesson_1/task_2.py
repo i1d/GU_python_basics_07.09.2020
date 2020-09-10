@@ -6,4 +6,4 @@ _time = int(input("Enter time in seconds: "))
 _time_hours = _time // 3600
 _time_minutes = (_time - _time_hours * 3600) // 60
 _time_seconds = _time - _time_hours * 3600 - _time_minutes * 60
-print(f'Time: {_time_hours:>02}:{_time_minutes:>02}:{_time_seconds:>02}')
+print(f'Time (hh:mm:ss): {_time_hours:>02}:{_time_minutes:>02}:{_time_seconds:>02}')
