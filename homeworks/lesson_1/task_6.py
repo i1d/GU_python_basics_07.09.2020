@@ -20,7 +20,9 @@ if b < a:
     print("Target distance should be >= distance for 1st day.")
 else:
     d = 1
-    while a < b:
+    while a <= b:
+        print(f'Day {d}: {a:.2f} km')
         a *= 1.1
         d += 1
+    print(f'Day {d}: {a:.2f} km')
     print(f'It will take {d} days to reach target distance.')
