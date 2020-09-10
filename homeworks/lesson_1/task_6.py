@@ -14,3 +14,13 @@
 
 Ответ: на 6-й день спортсмен достиг результата — не менее 3 км.
 """
+a = int(input("Enter distance in km for 1st day: "))
+b = int(input("Enter target distance in km: "))
+if b < a:
+    print("Target distance should be >= distance for 1st day.")
+else:
+    d = 1
+    while a < b:
+        a *= 1.1
+        d += 1
+    print(f'It will take {d} days to reach target distance.')
