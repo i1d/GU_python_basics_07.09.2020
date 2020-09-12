@@ -32,11 +32,11 @@ def rnd(type_lst):
             val.append(random.choice("ABCDEFGHIJKLMNOPQRSTUVWXYZ"))
     elif _choice == "tuple":
         val = ()
-        for i in range(random.randint(1, 3)):
+        for i in range(random.randint(2, 4)):
             val += (rnd(type_lst), )
     elif _choice == "set":
         val = set()
-        for i in range(random.randint(1, 3)):
+        for i in range(random.randint(2, 4)):
             val.add(rnd(type_set))
     elif _choice == "bool":
         val = bool(random.choice([0, 1]))
@@ -44,11 +44,21 @@ def rnd(type_lst):
         val = range(random.randint(0, 99))
     elif _choice == "dict":
         val = {}
-        for i in range(random.randint(1, 3)):
+        for i in range(random.randint(2, 4)):
             val[i] = rnd(type_lst)
     return val
 
 
+_list = []
 for i in range(random.randint(len(type_list), len(type_list) * 2)):
-    res = rnd(type_list)
-    print(f'{type(res)} sample: {res}')
+    _list.append(rnd(type_list))
+print(f'List with {len(_list)} items:')
+print(_list)
+class_len = []
+for item in _list:
+    class_len.append(len(str(type(item))))
+max_class_len = max(class_len)
+print()
+print("List items with their types:")
+for item in _list:
+    print(f'    {type(item)};{" " * (max_class_len - len(str(type(item))))} value: {item}')
