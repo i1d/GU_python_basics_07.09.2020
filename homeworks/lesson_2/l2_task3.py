@@ -14,7 +14,10 @@ while True:
         month = int(month)
         break
 seasons_list = ["winter", "spring", "summer", "autumn"]
-seasons_dict = {1:"winter", 2:"winter", 3:"spring", 4:"spring", 5:"spring", 6:"summer", 7:"summer", 8:"summer", 9:"autumn", 10:"autumn", 11:"autumn", 12:"winter"}
+seasons_dict = {12: "winter", 1: "winter", 2: "winter",
+                3: "spring", 4: "spring", 5: "spring",
+                6: "summer", 7: "summer", 8: "summer",
+                9: "autumn", 10: "autumn", 11: "autumn"}
 if month in [12, 1, 2]:
     print(f'_list_: This month is in the "{seasons_list[0]}" season.')
 elif month in [3, 4, 5]:
