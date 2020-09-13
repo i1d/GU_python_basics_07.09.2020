@@ -3,6 +3,8 @@
 Сообщить к какому времени года относится месяц (зима, весна, лето, осень).
 Напишите решения через list и через dict.
 """
+import datetime
+
 while True:
     print("Enter number of month:", end=" ")
     month = input()
@@ -18,12 +20,27 @@ seasons_dict = {12: "winter", 1: "winter", 2: "winter",
                 3: "spring", 4: "spring", 5: "spring",
                 6: "summer", 7: "summer", 8: "summer",
                 9: "autumn", 10: "autumn", 11: "autumn"}
+t_1 = datetime.datetime.now()
 if month in [12, 1, 2]:
-    print(f'_list_: This month is in the "{seasons_list[0]}" season.')
+    print(f'_list_: This month is in the "{seasons_list[0]}" season. ', end="")
 elif month in [3, 4, 5]:
-    print(f'_list_: This month is in the "{seasons_list[1]}" season.')
+    print(f'_list_: This month is in the "{seasons_list[1]}" season. ', end="")
 elif month in [6, 7, 8]:
-    print(f'_list_: This month is in the "{seasons_list[2]}" season.')
+    print(f'_list_: This month is in the "{seasons_list[2]}" season. ', end="")
 elif month in [9, 10, 11]:
-    print(f'_list_: This month is in the "{seasons_list[3]}" season.')
-print(f'_dict_: This month is in the "{seasons_dict[month]}" season.')
+    print(f'_list_: This month is in the "{seasons_list[3]}" season. ', end="")
+t_2 = datetime.datetime.now()
+t_diff_list = t_2 - t_1
+print(f'Time spent: {t_diff_list}')
+t_1 = datetime.datetime.now()
+print(f'_dict_: This month is in the "{seasons_dict[month]}" season. ', end="")
+t_2 = datetime.datetime.now()
+t_diff_dict = t_2 - t_1
+print(f'Time spent: {t_diff_dict}')
+print()
+if t_diff_dict < t_diff_list:
+    print(f'Conclusion: working with {type(seasons_dict)} is faster than working with {type(seasons_list)}: diff={t_diff_list - t_diff_dict}')
+elif t_diff_dict > t_diff_list:
+    print(f'Conclusion: working with {type(seasons_dict)} is slower than working with {type(seasons_list)}: diff={t_diff_dict - t_diff_list}')
+else:
+    print(f'Conclusion: working with {type(seasons_dict)} is equal working with {type(seasons_list)}: diff={t_diff_list - t_diff_dict}')
