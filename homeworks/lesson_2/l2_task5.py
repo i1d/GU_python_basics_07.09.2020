@@ -15,7 +15,7 @@ random.seed()
 my_list = []
 for i in range(1, random.randint(5, 10)):
     my_list.append(random.randint(1, 100))
-print(my_list)
+print(f'random_list: {my_list}')
 
 
 def sort(_list):
@@ -24,7 +24,6 @@ def sort(_list):
     while k <= len(_list) - 1:
         i = k
         while i < len(_list) - 1:
-            print(k, i, _list)
             if _list[i + 1] > _list[k]:
                 tmp = _list[i + 1]
                 _list[i + 1] = _list[k]
@@ -34,4 +33,22 @@ def sort(_list):
 
 
 sort(my_list)
-print(my_list)
+print(f'sorted_list: {my_list}')
+while True:
+    u_val = input("Enter int: ")
+    if not u_val.isnumeric():
+        print("Enter int, not string. Try again")
+    else:
+        u_val = int(u_val)
+        break
+k = 0
+while k <= len(my_list) - 1:
+    if u_val > my_list[k]:
+        my_list.insert(k, u_val)
+        print(f"> inserted {u_val} into {my_list} on {k}'th index")
+        break
+    k += 1
+if u_val <= my_list[-1]:  # не нравится это решение, ибо выглядит как адский костыль, но по-другому пока не придумал :(
+    my_list.append(u_val)
+    print(f"< inserted {u_val} into {my_list} as last element")
+print(f'new_list: {my_list}')
