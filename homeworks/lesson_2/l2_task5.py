@@ -9,3 +9,29 @@
 Пользователь ввел число 1. Результат: 7, 5, 3, 3, 2, 1.
 Набор натуральных чисел можно задать непосредственно в коде, например, my_list = [7, 5, 3, 3, 2].
 """
+import random
+
+random.seed()
+my_list = []
+for i in range(1, random.randint(5, 10)):
+    my_list.append(random.randint(1, 100))
+print(my_list)
+
+
+def sort(_list):
+    i = 0
+    k = 0
+    while k <= len(_list) - 1:
+        i = k
+        while i < len(_list) - 1:
+            print(k, i, _list)
+            if _list[i + 1] > _list[k]:
+                tmp = _list[i + 1]
+                _list[i + 1] = _list[k]
+                _list[k] = tmp
+            i += 1
+        k += 1
+
+
+sort(my_list)
+print(my_list)
