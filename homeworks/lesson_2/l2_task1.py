@@ -7,8 +7,8 @@
 import random
 
 random.seed()
-type_list = ["none", "int", "float", "str", "list", "tuple", "set", "bool", "range", "dict"]
-type_set = ["int", "float", "str", "tuple"]
+type_list = ["none", "int", "float", "complex", "str", "list", "tuple", "set", "bool", "range", "dict"]
+type_set = ["int", "float", "complex", "str", "tuple"]
 # Only immutable (and hashable) objects can be a part of a set object.
 # Numbers (integer, float, as well as complex), strings, and tuple objects are accepted
 
@@ -26,6 +26,8 @@ def rnd(type_lst):
         val = "".join(val)
     elif _choice == "float":
         val = random.random()
+    elif _choice == "complex":
+        val = complex(random.randint(1, 10), random.randint(1, 10))
     elif _choice == "list":
         val = []
         for i in range(random.randint(5, 10)):

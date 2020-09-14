@@ -21,3 +21,10 @@
 “ед”: [“шт.”]
 }
 """
+#goods_structure = ("item_name", "price", "qty", "qty_type")
+_goods_structure = ("item_name", "price")
+#while True:
+#    for p in goods_structure:
+#        _v = input()
+#d = {key: value for (key, value) in ["k","8"]}
+#print(d)
