@@ -21,31 +21,28 @@
 “ед”: [“шт.”]
 }
 """
-
 goods_structure = ("item_name", "price", "qty", "qty_type")
 _del = input("Enter the delimiter to split the list values: ")
-d = {}
-s = ()
 u = 1
 data = []
 while True:
     _list = input(f"Enter data ({goods_structure[0]}, {goods_structure[1]}, {goods_structure[2]}, {goods_structure[3]}) using '{_del}' symbol as the delimiter. Enter Q to stop.\n")
+    _list_data = _list.split(_del)
     if _list in "Q":
         break
     elif _del not in _list:
         print("Please use delimiter. Try again.")
-    elif len(_list.split(_del)) != 4:
+    elif len(_list_data) != 4:
         print("Wrong positions qty. Must be 4. Try again.")
-    elif not _list.split(_del)[1].isnumeric() or not _list.split(_del)[2].isnumeric():
+    elif not _list_data[1].isnumeric() or not _list_data[2].isnumeric():
         print("Price or Qty must be numeric. Try again.")
     else:
+        d = {}
         h = 0
-        while h <= 3:
-            for p in goods_structure:
-                d[p] = _list.split(_del)[h]
-                h += 1
-        s = (u, d)
-        data.append(s)
+        for p in goods_structure:
+            d[p] = _list_data[h]
+            h += 1
+        data.append((u, d.copy()))
         u += 1
 print(f'\nData structure:\n{data}\n')
 
