@@ -25,9 +25,9 @@ def sort(_list):
         i = k
         while i < len(_list) - 1:
             if _list[i + 1] > _list[k]:
-                tmp = _list[i + 1]
-                _list[i + 1] = _list[k]
-                _list[k] = tmp
+#                tmp = _list[i + 1]
+                _list[i + 1], _list[k] = _list[k], _list[i + 1]
+ #               _list[k] = tmp
             i += 1
         k += 1
 
