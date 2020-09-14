@@ -21,6 +21,7 @@
 “ед”: [“шт.”]
 }
 """
+
 goods_structure = ("item_name", "price", "qty", "qty_type")
 _del = input("Enter the delimiter to split the list values: ")
 d = {}
@@ -39,10 +40,24 @@ while True:
         print("Price or Qty must be numeric. Try again.")
     else:
         h = 0
-        for p in goods_structure:
-            d[p] = _list.split(_del)[h]
-            h += 1
+        while h <= 3:
+            for p in goods_structure:
+                d[p] = _list.split(_del)[h]
+                h += 1
         s = (u, d)
         data.append(s)
         u += 1
-print(data)
+print(f'\nData structure:\n{data}\n')
+
+# data = [(1, {'item_name': 'comp', 'price': '100', 'qty': '2', 'qty_type': 'sht'}), (2, {'item_name': 'printer', 'price': '200', 'qty': '1', 'qty_type': 'sht'}), (3, {'item_name': 'water', 'price': '5', 'qty': '100', 'qty_type': 'liter'})]
+
+analysis = {}
+di_arr = []
+for t in range(len(data)):
+    di_arr.append(data[t][1])
+for key in goods_structure:
+    arr_val = []
+    for k in range(len(di_arr)):
+        arr_val.append(di_arr[k][key])
+    analysis[key] = arr_val
+print(f"Analytic's data:\n{analysis}")
