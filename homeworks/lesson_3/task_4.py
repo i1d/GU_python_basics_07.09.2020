@@ -5,3 +5,28 @@
 Подсказка: попробуйте решить задачу двумя способами. Первый — возведение в степень с помощью оператора **.
 Второй — более сложная реализация без оператора **, предусматривающая использование цикла.
 """
+
+
+def my_func_1(x, y):
+    """Function to return x^y using **"""
+
+    return x ** y
+
+
+def my_func_2(x, y):
+    """Function to return x^y using cycle"""
+
+    if y < 0:
+        y *= -1
+    r = 1
+    for _ in range(y):
+        r *= x
+    r = 1 / r
+    return r
+
+
+print(my_func_1(10, -1))
+print(my_func_2(10, -1))
+
+print(my_func_1(8.54, -5))
+print(my_func_2(8.54, -5))

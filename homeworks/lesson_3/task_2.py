@@ -12,5 +12,5 @@ def enter_func(first_name="Ivan", last_name="Ivanov", year_of_birth=1900, city="
     return f'{first_name} {last_name} ({year_of_birth}): {city}, {email}, {phone}'
 
 
-print(enter_func(last_name='Fedorov', first_name='Petr', city="Tallinn", phone="+5134753634", year_of_birth=1950))
+print(enter_func(last_name='Fedorov', first_name="Petr", city="Tallinn", phone="+5134753634", year_of_birth=1950))
 
