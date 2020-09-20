@@ -16,7 +16,8 @@ for i in range(1, len(lst)):
     if lst[i] > lst[i - 1]:
         c_lst.append(lst[i])
 
-c_lst_2 = [el[1] for el in [(idx, val) for idx, val in enumerate(lst[1:], 1) if lst[idx] > lst[idx - 1]]]
+#c_lst_2 = [el[1] for el in [(idx, val) for idx, val in enumerate(lst[1:], 1) if lst[idx] > lst[idx - 1]]]
+c_lst_2 = [val for idx, val in enumerate(lst[1:], 1) if lst[idx] > lst[idx - 1]]
 assert c_lst == c_lst_2, "Check c_lst_2!"
 
 print(f'Converted list: {c_lst}')
