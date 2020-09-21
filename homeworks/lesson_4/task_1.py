@@ -7,6 +7,9 @@ import sys
 
 s_arg = sys.argv
 
+def salary_calc(h, r, b):
+    return h * r + b
+
 hours = rate = bonus = 0
 
 try:
@@ -34,6 +37,6 @@ except IndexError:
 if len(s_arg) == 4 and (isinstance(hours, int) or isinstance(hours, float)) \
                     and (isinstance(rate, int) or isinstance(rate, float)) \
                     and (isinstance(bonus, int) or isinstance(bonus, float)):
-    print(f'Salary = [({hours} * {rate}) + {bonus}] = {hours * rate + bonus:.2f}')
+    print(f'Salary = [({hours} * {rate}) + {bonus}] = {salary_calc(hours, rate, bonus):.2f}')
 else:
     print("Wrong parameters.")
