@@ -34,6 +34,7 @@ except ValueError:
 except IndexError:
     print("Wrong parameters qty. Must be 3.")
 
+
 if len(s_arg) == 4 and (isinstance(hours, int) or isinstance(hours, float)) \
                     and (isinstance(rate, int) or isinstance(rate, float)) \
                     and (isinstance(bonus, int) or isinstance(bonus, float)):
