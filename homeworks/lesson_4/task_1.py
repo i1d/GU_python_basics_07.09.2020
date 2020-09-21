@@ -7,8 +7,10 @@ import sys
 
 s_arg = sys.argv
 
+
 def salary_calc(h, r, b):
     return h * r + b
+
 
 hours = rate = bonus = 0
 
