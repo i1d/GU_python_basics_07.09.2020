@@ -8,14 +8,17 @@ with open(f_name, "r") as f:
 #print(f'There are {len(rows)} rows in the "{f_name}" file. Here are some info about them:')
 total_salary = 0
 salary_cnt = 0
+emps = []
 for num, row in enumerate(rows, 1):
     r = tuple(row.split())
     if len(r) >= 2:
         try:
-            if int(r[1]) < salary_limit:
+            if float(r[1]) < salary_limit:
                 print(f'This employee has salary < {salary_limit}: {r[0]}')
-            total_salary += int(r[1])
+                emps.append(r[0])
+            total_salary += float(r[1])
             salary_cnt += 1
         except ValueError as err:
             print(f'Error. Check row #{num}. Seems salary format is not a number. Details: {err}')
-print(f'Average salary = {total_salary / salary_cnt:.2f}')
+print(f'\nEmployees with salary < {salary_limit}: {", ".join(emps)}.')
+print(f'Overall average salary = {total_salary / salary_cnt:.2f}.')
