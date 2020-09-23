@@ -1,0 +1,16 @@
+Pushed 1 commit to origin/lesson_4
+
+Checked out new branch lesson_5 from master (show balloon)
+
+Externally added files can be added to Git
+			View Files
+			Always Add
+			Don't Ask Again
+
+7 files committed: lesson_5 task_1 commit
+
+Pushed lesson_5 to new branch origin/lesson_5
+
+5
+
+word
