@@ -7,7 +7,6 @@ def cnt(_cnt):
 
 
 f_name = "task_2.txt"
-row_cnt = 0
 with open(f_name, "r") as f:
     rows = f.readlines()
 print(f'There are {len(rows)} rows in the "{f_name}" file. Here are some info about them:')
