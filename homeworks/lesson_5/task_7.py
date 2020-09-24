@@ -19,31 +19,29 @@ f_in = "task_7_in.txt"
 with open(f_in, "r") as f_in:
     d_firms = {}
     d_average_profit = {}
-    average_profit = 0
     sum_profit = 0
     profit_count = 0
-    l = []
     for num, row in enumerate(f_in, 1):
         _r = []
+        pos = 0
         if len(row) > 1:  # "empty string has \n symbol"
-    #        r_comp_name = ""
             r = row.rstrip("\n").split(" ")
-     #       print(num, r)
             for i in r:
                 if i in lst:
                     pos = r.index(i)
-      #      print(num, pos)
-            r_comp_name = " ".join(r[0:pos])
-            income = float(r[pos + 1])
-            expense = float(r[pos + 2])
-            profit = round(income - expense, 2)
-            if profit > 0:
-                print(f'"{r_comp_name}" profit is: {profit:.2f}')
-                sum_profit += profit
-                profit_count += 1
-            average_profit = round(sum_profit / profit_count, 2)
-            d_firms[r_comp_name] = profit
-            d_average_profit["average_profit"] = average_profit
+                    r_comp_name = " ".join(r[0:pos])
+                    income = float(r[pos + 1])
+                    expense = float(r[pos + 2])
+                    profit = round(income - expense, 2)
+                    if profit > 0:
+                        print(f'"{r_comp_name}" profit is: {profit:.2f}')
+                        sum_profit += profit
+                        profit_count += 1
+                    average_profit = round(sum_profit / profit_count, 2)
+                    d_firms[r_comp_name] = profit
+                    d_average_profit["average_profit"] = average_profit
+            if pos == 0:
+                print(f"Company organization form is not found in row #{num}.")
     print(f'Average profit is: {average_profit}\n')
 
     l = [d_firms, d_average_profit]
