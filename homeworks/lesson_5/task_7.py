@@ -11,3 +11,43 @@
 [{"firm_1": 5000, "firm_2": 3000, "firm_3": 1000}, {"average_profit": 2000}]
 
 Подсказка: использовать менеджеры контекста."""
+import json
+
+lst = ["ООО", "OOO", "ИП", "ОАО", "ЗАО"]
+
+f_in = "task_7_in.txt"
+with open(f_in, "r") as f_in:
+    d_firms = {}
+    d_average_profit = {}
+    average_profit = 0
+    sum_profit = 0
+    profit_count = 0
+    l = []
+    for num, row in enumerate(f_in, 1):
+        _r = []
+        if len(row) > 1:  # "empty string has \n symbol"
+    #        r_comp_name = ""
+            r = row.rstrip("\n").split(" ")
+     #       print(num, r)
+            for i in r:
+                if i in lst:
+                    pos = r.index(i)
+      #      print(num, pos)
+            r_comp_name = " ".join(r[0:pos])
+            income = float(r[pos + 1])
+            expense = float(r[pos + 2])
+            profit = round(income - expense, 2)
+            if profit > 0:
+                print(f'"{r_comp_name}" profit is: {profit:.2f}')
+                sum_profit += profit
+                profit_count += 1
+            average_profit = round(sum_profit / profit_count, 2)
+            d_firms[r_comp_name] = profit
+            d_average_profit["average_profit"] = average_profit
+    print(f'Average profit is: {average_profit}\n')
+
+    l = [d_firms, d_average_profit]
+    print(l)
+
+with open("task_7_out.json", "w", encoding="UTF-8") as f_json_out:
+    json.dump(l, f_json_out, ensure_ascii=False)
