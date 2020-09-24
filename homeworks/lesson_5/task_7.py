@@ -13,7 +13,7 @@
 Подсказка: использовать менеджеры контекста."""
 import json
 
-lst = ["ООО", "OOO", "ИП", "ОАО", "ЗАО"]
+lst = ("ООО", "OOO", "ИП", "ОАО", "ЗАО", "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ")
 
 f_in = "task_7_in.txt"
 with open(f_in, "r") as f_in:
@@ -27,7 +27,7 @@ with open(f_in, "r") as f_in:
         if len(row) > 1:  # "empty string has \n symbol"
             r = row.rstrip("\n").split(" ")
             for i in r:
-                if i in lst:
+                if i.upper() in lst:
                     pos = r.index(i)
                     r_comp_name = " ".join(r[0:pos])
                     income = float(r[pos + 1])

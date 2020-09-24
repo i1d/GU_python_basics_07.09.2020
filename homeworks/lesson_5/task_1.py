@@ -8,7 +8,7 @@ with open(f_name, "w") as f:
         if len(s) == 0:
             break
         else:
-            print(s, file=f)
+            f.write(f'{s}\n')
 print("Thank you. You have entered:")
 with open(f_name, "r") as f:
     for line in f:
