@@ -30,7 +30,7 @@ class TrafficLight:
         print(f"Turning the Traffic Light on.")
         с = 0
         for color in cycle(["Red", "Yellow", "Green"]):
-            if с > 2:
+            if с > 10:
                 break
             if color == "Red":
                 TrafficLight.__color = color
