@@ -8,3 +8,111 @@ speed, color, name, is_police (булево). А также методы: go, st
 Создайте экземпляры классов, передайте значения атрибутов. Выполните доступ к атрибутам, выведите результат.
 Выполните вызов методов и также покажите результат.
 """
+import random
+
+random.seed()
+
+turn_direction = ("right", "left", "forward", "backward")
+
+
+class Car:
+    speed = 0
+    color = ""
+    name = ""
+    is_police = bool
+
+    def __init__(self, name, color):
+        self.name = name
+        self.color = color
+        self.direction = ""
+
+    def go(self):
+        self.speed = random.randint(1, 100)
+        print(f'{self.color} {self.name} started driving.')
+
+    def stop(self):
+        self.speed = 0
+        print(f'{self.color} {self.name} has stopped.')
+
+    def turn(self, direction):
+        self.direction = direction
+        print(f'{self.color} {self.name} has turned {self.direction}.')
+
+    def show_speed(self):
+        print(f'Current speed of {self.color} {self.name} car is: {self.speed}.')
+
+
+class TownCar(Car):
+    is_police = False
+
+    def show_speed(self):
+        print(f'Current speed of {self.color} {self.name} car is: {self.speed}.')
+        if self.speed > 60:
+            print(f'Current speed is exceeded the limit of 60!!!')
+
+
+class SportCar(Car):
+    is_police = False
+
+
+class WorkCar(Car):
+    Car.is_police = False
+
+    def show_speed(self):
+        print(f'Current speed of {self.color} {self.name} car is: {self.speed}.')
+        if self.speed > 40:
+            print(f'Current speed is exceeded the limit of 40!!!')
+
+
+class PoliceCar(Car):
+    Car.is_police = True
+
+
+town_car_1 = TownCar("town_car", "black")
+print(town_car_1.name, town_car_1.color, town_car_1.is_police)
+town_car_1.show_speed()
+town_car_1.go()
+town_car_1.show_speed()
+town_car_1.turn(random.choice(turn_direction))
+print(town_car_1.direction)
+town_car_1.show_speed()
+town_car_1.stop()
+town_car_1.show_speed()
+
+print("-" * 10)
+
+sport_car_1 = SportCar("sport_car", "red")
+print(sport_car_1.name, sport_car_1.color, sport_car_1.is_police)
+sport_car_1.show_speed()
+sport_car_1.go()
+sport_car_1.show_speed()
+sport_car_1.turn(random.choice(turn_direction))
+print(sport_car_1.direction)
+sport_car_1.show_speed()
+sport_car_1.stop()
+sport_car_1.show_speed()
+
+print("-" * 10)
+
+work_car_1 = WorkCar("work_car", "white")
+print(work_car_1.name, work_car_1.color, work_car_1.is_police)
+work_car_1.show_speed()
+work_car_1.go()
+work_car_1.show_speed()
+work_car_1.turn(random.choice(turn_direction))
+print(work_car_1.direction)
+work_car_1.show_speed()
+work_car_1.stop()
+work_car_1.show_speed()
+
+print("-" * 10)
+police_car_1 = PoliceCar("police_car", "black")
+print(police_car_1.name, police_car_1.color, police_car_1.is_police)
+police_car_1.show_speed()
+police_car_1.go()
+police_car_1.show_speed()
+police_car_1.turn(random.choice(turn_direction))
+print(police_car_1.direction)
+police_car_1.show_speed()
+police_car_1.stop()
+police_car_1.show_speed()
