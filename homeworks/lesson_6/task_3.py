@@ -6,3 +6,44 @@ position (должность), income (доход). Последний атри�
 реальных данных (создать экземпляры класса Position, передать данные, проверить значения атрибутов,
 вызвать методы экземпляров).
 """
+
+
+class Worker:
+    name = ""
+    surname = ""
+    position = ""
+    _income = {"wage": 0, "bonus": 0}
+
+    def __init__(self, name, surname, position, income):
+        self.name = name
+        self.surname = surname
+        self.position = position
+        self.income = income
+
+
+class Position(Worker):
+    def get_full_name(self):
+        print(f'{self.name} {self.surname}')
+
+    def get_total_income(self):
+        print(f"{self.position}'s total wage = {float(self.income['wage']) + float(self.income['bonus']):.2f}")
+
+
+w1 = Position(name="Ivan", surname="Ivanov", position="developer", income={"wage": 100000, "bonus": 50000})
+print(w1.name, w1.surname, w1.position, w1.income)
+w1.get_full_name()
+w1.get_total_income()
+
+print("-" * 5)
+
+w2 = Position(name="Petr", surname="Petrov", position="senior developer", income={"wage": 200000, "bonus": 100000})
+print(w2.name, w2.surname, w2.position, w2.income)
+w2.get_full_name()
+w2.get_total_income()
+
+print("-" * 5)
+
+w3 = Position(name="Igor", surname="Igorev", position="teamlead", income={"wage": 210000, "bonus": 110000})
+print(w3.name, w3.surname, w3.position, w3.income)
+w3.get_full_name()
+w3.get_total_income()
