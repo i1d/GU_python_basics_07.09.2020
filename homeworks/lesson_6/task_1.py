@@ -30,17 +30,17 @@ class TrafficLight:
         print(f"Turning the Traffic Light on.")
         с = 0
         for color in cycle(["Red", "Yellow", "Green"]):
-            if с > 10:
+            if с >= 9:
                 break
             if color == "Red":
-                TrafficLight.__color = color
-                print_wait(color, 7)
+                self.__color = color
+                print_wait(self.__color, 7)
             elif color == "Yellow":
-                TrafficLight.__color = color
-                print_wait(color, 2)
+                self.__color = color
+                print_wait(self.__color, 2)
             elif color == "Green":
-                TrafficLight.__color = color
-                print_wait(color, random.randint(1, 10))
+                self.__color = color
+                print_wait(self.__color, random.randint(1, 10))
             с += 1
 
 
