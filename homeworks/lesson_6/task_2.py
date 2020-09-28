@@ -6,20 +6,18 @@
 Например: 20м * 5000м * 25кг * 5см = 12500 т"""
 default_m = 25
 
-class Road():
+
+class Road:
     _length = 0
     _width = 0
 
-
     def weight(self, mass_1cm, thickness):
-        mass = Road._length * Road._width * mass_1cm * thickness
+        mass = self._length * self._width * mass_1cm * thickness
         return mass
 
     def __init__(self, length, width):
-        self.mass_1cm = 0
-        self.thickness = 0
-        Road._length = length
-        Road._width = width
+        self._length = length
+        self._width = width
 
 
 l = input("Enter road length in meters: ")
@@ -41,6 +39,8 @@ except ValueError as err:
 try:
     r = Road(l, w)
     m = r.weight(default_m, th)
-    print(f'You will need {m:.2f}kg (or {m/1000:.2f}t) of asphalt to cover up the road\n5%with lenght={l}m, width={w}m and asphalt thickness={th}cm.')
+    print(f'You will need {m:.2f} kg (or {m / 1000:.2f} tons) of asphalt to cover up the road\n'
+          f'with lenght={l}m, width={w}m and asphalt thickness={th}cm.\n'
+          f'Default asphalt weight to cover 1 square meter = {default_m} kg.')
 except TypeError as err:
     print(f"Sorry, seems some value has wrong type. Details: {err}")
