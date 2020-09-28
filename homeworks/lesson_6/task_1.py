@@ -26,8 +26,8 @@ def print_wait(col, time):
 class TrafficLight:
     __color = ""
 
-    def running(self):
-        print(f"Turning the Traffic Light on.")
+    def running_1(self):
+        print(f"Turning the Traffic Light on - option 1.")
         с = 0
         for color in cycle(["Red", "Yellow", "Green"]):
             if с >= 9:
@@ -43,6 +43,27 @@ class TrafficLight:
                 print_wait(self.__color, random.randint(1, 10))
             с += 1
 
+    def running_2(self):
+        print(f'Turning the Traffic Light on - option 2.')
+        c = 0
+        while c <= 9:
+            if not self.__color:
+                self.__color = "Red"
+            elif self.__color == "Red":
+                print_wait(self.__color, 7)
+                self.__color = "Yellow"
+            elif self.__color == "Yellow":
+                print_wait(self.__color, 2)
+                self.__color = "Green"
+            elif self.__color == "Green":
+                print_wait(self.__color, random.randint(1, 10))
+                self.__color = "Red"
+            c += 1
 
-light = TrafficLight()
-light.running()
+light1 = TrafficLight()
+light1.running_1()
+
+print("*" * 10)
+
+light2 = TrafficLight()
+light2.running_2()
