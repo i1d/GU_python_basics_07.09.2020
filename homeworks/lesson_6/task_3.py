@@ -34,14 +34,14 @@ print(w1.name, w1.surname, w1.position, w1.income)
 w1.get_full_name()
 w1.get_total_income()
 
-print("-" * 5)
+print("-" * 10)
 
 w2 = Position(name="Petr", surname="Petrov", position="senior developer", income={"wage": 200000, "bonus": 100000})
 print(w2.name, w2.surname, w2.position, w2.income)
 w2.get_full_name()
 w2.get_total_income()
 
-print("-" * 5)
+print("-" * 10)
 
 w3 = Position(name="Igor", surname="Igorev", position="teamlead", income={"wage": 210000, "bonus": 110000})
 print(w3.name, w3.surname, w3.position, w3.income)
