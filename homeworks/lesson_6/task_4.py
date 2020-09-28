@@ -45,6 +45,10 @@ class Car:
 class TownCar(Car):
     is_police = False
 
+    def __init__(self, color):
+        self.color = color
+        super().__init__('TOWN_CAR', self.color)
+
     def show_speed(self):
         print(f'Current speed of {self.color} {self.name} car is: {self.speed}.')
         if self.speed > 60:
@@ -54,9 +58,17 @@ class TownCar(Car):
 class SportCar(Car):
     is_police = False
 
+    def __init__(self, color):
+        self.color = color
+        super().__init__('SPORT_CAR', self.color)
+
 
 class WorkCar(Car):
-    Car.is_police = False
+    is_police = False
+
+    def __init__(self, color):
+        self.color = color
+        super().__init__('WORK_CAR', self.color)
 
     def show_speed(self):
         print(f'Current speed of {self.color} {self.name} car is: {self.speed}.')
@@ -67,9 +79,13 @@ class WorkCar(Car):
 class PoliceCar(Car):
     Car.is_police = True
 
+    def __init__(self, color):
+        self.color = color
+        super().__init__('POLICE_CAR', self.color)
 
-town_car_1 = TownCar("town_car", "black")
-print(town_car_1.name, town_car_1.color, town_car_1.is_police)
+
+town_car_1 = TownCar("black")
+print(town_car_1.name, town_car_1.color, "is civil car" if not town_car_1.is_police else "is police car")
 town_car_1.show_speed()
 town_car_1.go()
 town_car_1.show_speed()
@@ -81,8 +97,8 @@ town_car_1.show_speed()
 
 print("-" * 10)
 
-sport_car_1 = SportCar("sport_car", "red")
-print(sport_car_1.name, sport_car_1.color, sport_car_1.is_police)
+sport_car_1 = SportCar("red")
+print(sport_car_1.name, sport_car_1.color, "is civil car" if not town_car_1.is_police else "is police car")
 sport_car_1.show_speed()
 sport_car_1.go()
 sport_car_1.show_speed()
@@ -94,8 +110,8 @@ sport_car_1.show_speed()
 
 print("-" * 10)
 
-work_car_1 = WorkCar("work_car", "white")
-print(work_car_1.name, work_car_1.color, work_car_1.is_police)
+work_car_1 = WorkCar("white")
+print(work_car_1.name, work_car_1.color, "is civil car" if not town_car_1.is_police else "is police car")
 work_car_1.show_speed()
 work_car_1.go()
 work_car_1.show_speed()
@@ -106,8 +122,8 @@ work_car_1.stop()
 work_car_1.show_speed()
 
 print("-" * 10)
-police_car_1 = PoliceCar("police_car", "black")
-print(police_car_1.name, police_car_1.color, police_car_1.is_police)
+police_car_1 = PoliceCar("black")
+print(police_car_1.name, police_car_1.color, "is civil car" if not town_car_1.is_police else "is police car")
 police_car_1.show_speed()
 police_car_1.go()
 police_car_1.show_speed()
