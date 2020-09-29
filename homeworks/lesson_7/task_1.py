@@ -17,13 +17,14 @@ class Matrix:
         self.matr = matr
 
     def __str__(self):
-        s = ""
-        for i in range(len(self.matr)):
-            s += f'{" ".join(list(map(str, self.matr[i])))}\n'
-        return s[:-1]
+        self.__s = ""
+      #  for i in range(len(self.matr)):
+      #      s += f'{" ".join(list(map(str, self.matr[i])))}\n'
+        self.__s += "".join([f'{" ".join(list(map(str, self.matr[i])))}\n' for i in range(len(self.matr))])
+        return self.__s[:-1]
 
     def __add__(self, other):
-        matr_sum = []
+        __matr_sum = []
         self.size = (len(self.matr), len(self.matr[0]))
         other.size = (len(other.matr), len(other.matr[0]))
         if self.size != other.size:
@@ -35,17 +36,14 @@ class Matrix:
           #      r = []
           #      for k in range(self.size[1]):
           #          r.append(self.matr[i][k] + other.matr[i][k])
-       #     matr_sum = [[self.matr[i][k] + other.matr[i][k] for k in range(self.size[1])] for i in range(self.size[0])]
          #       matr_sum.append(r)
-            return Matrix([[self.matr[i][k] + other.matr[i][k] for k in range(self.size[1])]
-                           for i in range(self.size[0])]) #if len(matr_sum) > 0 else None
+            __matr_sum = [[self.matr[i][k] + other.matr[i][k] for k in range(self.size[1])] for i in range(self.size[0])]
+        return Matrix(__matr_sum) #if len(matr_sum) > 0 else None
 
 
-def gen_matrix(size):
-    row = size[0]
-    col = size[1]
-    matr = [[random.randint(-9, 9) for _ in range(row)] for _ in range(col)]
-    return matr
+def gen_matrix(_size):
+    row, col = _size
+    return [[random.randint(-9, 9) for _ in range(row)] for _ in range(col)]
 
 
 size = (random.randint(2, 5), random.randint(2, 5))
