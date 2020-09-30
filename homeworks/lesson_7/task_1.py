@@ -18,13 +18,13 @@ class Matrix:
 
     def __str__(self):
         self.__s = ""
-      #  for i in range(len(self.matr)):
-      #      s += f'{" ".join(list(map(str, self.matr[i])))}\n'
+        #  for i in range(len(self.matr)):
+        #      s += f'{" ".join(list(map(str, self.matr[i])))}\n'
         self.__s += "".join([f'{" ".join(list(map(str, self.matr[i])))}\n' for i in range(len(self.matr))])
         return self.__s[:-1]
 
     def __add__(self, other):
-        __matr_sum = []
+        _matr_sum = []
         self.size = (len(self.matr), len(self.matr[0]))
         other.size = (len(other.matr), len(other.matr[0]))
         if self.size != other.size:
@@ -32,13 +32,14 @@ class Matrix:
                   f"First  matrix size = {self.size[0]}x{self.size[1]},\n"
                   f"Second matrix size = {other.size[0]}x{other.size[1]}.\n")
         else:
-          #  for i in range(self.size[0]):
-          #      r = []
-          #      for k in range(self.size[1]):
-          #          r.append(self.matr[i][k] + other.matr[i][k])
-         #       matr_sum.append(r)
-            __matr_sum = [[self.matr[i][k] + other.matr[i][k] for k in range(self.size[1])] for i in range(self.size[0])]
-        return Matrix(__matr_sum) #if len(matr_sum) > 0 else None
+            #  for i in range(self.size[0]):
+            #      r = []
+            #      for k in range(self.size[1]):
+            #          r.append(self.matr[i][k] + other.matr[i][k])
+            #       matr_sum.append(r)
+            _matr_sum = [[self.matr[i][k] + other.matr[i][k] for k in range(self.size[1])] for i in
+                          range(self.size[0])]
+        return Matrix(_matr_sum) if _matr_sum else "Unable to sum."
 
 
 def gen_matrix(_size):
@@ -72,4 +73,3 @@ print(f"Matrix 5. id={id(m5)}\n{m5}")
 print("-" * 20)
 if len(str(m6)) > 0:
     print(f"Sum of matrices. id={id(m6)}\n{m6}")
-
