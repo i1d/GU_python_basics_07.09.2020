@@ -37,8 +37,8 @@ class Matrix:
             #      for k in range(self.size[1]):
             #          r.append(self.matr[i][k] + other.matr[i][k])
             #       matr_sum.append(r)
-            _matr_sum = [[self.matr[i][k] + other.matr[i][k] for k in range(self.size[1])] for i in
-                          range(self.size[0])]
+            _matr_sum = [[self.matr[i][k] + other.matr[i][k] for k in range(self.size[1])]
+                         for i in range(self.size[0])]
         return Matrix(_matr_sum) if _matr_sum else "Unable to sum."
 
 
