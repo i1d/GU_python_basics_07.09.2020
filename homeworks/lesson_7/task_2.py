@@ -43,6 +43,9 @@ class Suite(Clothes):
 if __name__ == '__main__':
     c1 = Coat("Пальто", random.randint(0, 10))
     print(f'Fabric consumption for {c1.name} with size {c1.size} is: {c1.consumption:.2f}')
-    print()
+
     s1 = Suite("Костюм", random.randint(0, 10))
     print(f'Fabric consumption for {s1.name} with size {s1.size} is: {s1.consumption}')
+
+    s2 = Suite("Пиджак", random.randint(0, 10))
+    print(f'Fabric consumption for {s2.name} with size {s2.size} is: {s2.consumption}')
