@@ -17,6 +17,10 @@
 Или, количество ячеек клетки равняется 15, количество ячеек в ряду — 5. Тогда метод make_order() вернет строку: *****\n*****\n*****.
 Подсказка: подробный список операторов для перегрузки доступен по ссылке https://pythonworld.ru/osnovy/peregruzka-operatorov.html."""
 
+import random
+
+random.seed()
+
 
 class Cell:
     def __init__(self, slots):
@@ -39,16 +43,19 @@ class Cell:
         return Cell(round(self.slots_qty / other.slots_qty))
 
     def make_order(self, qt):
-        k = self.slots_qty
-        st = ""
-        for _ in range(k // qt):
-            st += "*" * qt + "\n"
-        st += "*" * (k % qt)
-        return st
+        if qt > 0:
+            k = self.slots_qty
+            st = ""
+            for _ in range(k // qt):
+                st += "*" * qt + "\n"
+            st += "*" * (k % qt)
+            return st
+        else:
+            return "Parameter should be > 0."
 
 
-c1 = Cell(11)
-c2 = Cell(5)
+c1 = Cell(random.randint(1, 10))
+c2 = Cell(random.randint(1, 10))
 print(f'Initial cells slots: c1={c1.slots_qty}; c2={c2.slots_qty}')
 
 c3 = c1 + c2
@@ -76,5 +83,6 @@ except TypeError:
     print(f'Division: {c6.slots_qty}')
 
 print("-" * 20)
-c7 = Cell(12)
-print(c7.make_order(5))
+c7 = Cell(random.randint(0, 20))
+ord = random.randint(0, 10)
+print(f'Order with cell slots {c7.slots_qty} and order {ord}:\n{c7.make_order(ord)}')
