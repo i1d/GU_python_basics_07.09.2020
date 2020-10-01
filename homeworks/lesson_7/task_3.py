@@ -40,7 +40,11 @@ class Cell:
         return Cell(self.slots_qty * other.slots_qty)
 
     def __truediv__(self, other):  # /
-        return Cell(round(self.slots_qty / other.slots_qty))
+        #return Cell(round(self.slots_qty / other.slots_qty))
+        return self.__floordiv__(other)
+
+    def __floordiv__(self, other):  # //
+        return Cell(self.slots_qty // other.slots_qty)
 
     def make_order(self, qt):
         if qt > 0:
@@ -78,9 +82,10 @@ print(f'Multiplication: {c5.slots_qty}')
 
 try:
     c6 = c1 // c2
-except TypeError:
+    print(f'Division //: {c6.slots_qty}')
+except TypeError: # использовал костыль, чтобы использовать ошибку при целочисленном делении и отсутствии перегрузки __floordiv__
     c6 = c1 / c2
-    print(f'Division: {c6.slots_qty}')
+    print(f'Division /: {c6.slots_qty}')
 
 print("-" * 20)
 c7 = Cell(random.randint(0, 20))
