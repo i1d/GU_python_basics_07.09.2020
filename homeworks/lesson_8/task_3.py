@@ -17,6 +17,7 @@ class NumberError(Exception):
 
 
 def is_int(str):
+    """Check if string can be converted to int"""
     c = 0
     for el in str:
         if el in int_digits:
@@ -28,6 +29,7 @@ def is_int(str):
 
 
 def is_float(str):
+    """Check if string can be converted to float"""
     c = 0
     cd = 0
     for el in str:
@@ -50,19 +52,18 @@ def is_float(str):
 inp = ""
 lst = []
 while True:
-    inp = input("\nEnter a number to add it to the list: ")
+    inp = input(f"\nEnter a number to add it to the list {lst}: ")
     try:
         if is_int(inp):
             lst.append(int(inp))
-            print(f"Our list: {lst}.")
+   #         print(f"Our list: {lst}.")
         elif is_float(inp):  # чтоб в массиве могли оказаться числа как int, так и float
             lst.append(float(inp))
-            print(f"Our list: {lst}.")
+    #        print(f"Our list: {lst}.")
         elif inp.lower() == "stop":
             print(f"Our final list: {lst}.\nThank you, bye.")
             break
         else:
             raise NumberError(f"This is not a number. This is {type(inp)}.")
     except NumberError as err:
-        print(err)
-        print(f"Our list: {lst}.")
+        print(f"{err} Our list: {lst}.")
