@@ -96,9 +96,9 @@ class UI:
             try:
                 user_action = int(input(ask_user))
                 if user_action not in (1, 2, 3, 5):
-                    raise WarehouseError("Wrong choice, please choose correct option:")
-            except ValueError:
-                print('Wrong input. Try again.')
+                    raise WarehouseError("Wrong choice, please choose correct option: ")
+            except ValueError as err:
+                print(f'Wrong input. Try again. Details: {err}')
                 continue
             except WarehouseError as err:
                 print(err)
@@ -113,17 +113,21 @@ class Warehouse(task_4.Warehouse):
 
     def put_obj(self, obj):
         print(f'...Trying to load "{obj.unit_name}" to the warehouse...')
-        try:
-            if self.space_occupied + obj.unit_size > self.capacity:
-                raise WarehouseError(f"Oops! There are not enough space in the Warehouse!\n"
-                                     f"Current warehouse capacity={self.capacity};"
-                                     f"Current occupied space={self.space_occupied}.")
-        except WarehouseError as err:
-            print(err)
-        else:
-            self.objects.append(obj)
-            self.space_occupied += obj.unit_size
-            print(f'..."{obj.unit_name}" loaded successfully!')
+        while True:
+            try:
+                if self.space_occupied + obj.unit_size > self.capacity:
+                    raise WarehouseError(f"Oops! There are not enough space in the Warehouse!\n"
+                                         f"   Current warehouse capacity={self.capacity};\n"
+                                         f"   Current occupied space={self.space_occupied};\n"
+                                         f"   But you tried to load an item with size={obj.unit_size}!")
+            except WarehouseError as err:
+                print(err)
+                break
+            else:
+                self.objects.append(obj)
+                self.space_occupied += obj.unit_size
+                print(f'..."{obj.unit_name}" loaded successfully!')
+                break
 
     def pass_obj(self, obj, dept):
         print(f'...Trying to pass "{obj.unit_name}" from the warehouse to "{dept}" department...')
@@ -219,36 +223,45 @@ def action():
                     print("Warehouse created!")
                     break
         elif action == 1:
-            obj_list = [obj.unit_name for obj in warehouse.objects]
-            print(f'Current warehouse: Capacity={warehouse.capacity}, Objects={obj_list}, Occupied space={warehouse.space_occupied}.')
-            if warehouse.space_occupied == 0:
-                print(f"Seems warehouse is empty, let's put something in!")
+            try:
+                obj_list = [obj.unit_name for obj in warehouse.objects]
+                print(f'Current warehouse state:\n'
+                      f'   Capacity={warehouse.capacity}\n'
+                      f'   Occupied space={warehouse.space_occupied}\n'
+                      f'   Objects={obj_list}')
+                if warehouse.space_occupied == 0:
+                    print(f"Seems warehouse is empty, let's put something in!")
+            except UnboundLocalError:
+                print("Seems there are no warehouse yet. Let's go and create one!")
         elif action == 2:
             print("Let's create an item and put it to the Warehouse!")
             warehouse.put_obj(equipment_choice())
         elif action == 3:
-            print("There are next items on the warehouse: ")
-            obj_list = [vars(obj) for obj in warehouse.objects]
-            obj_nums = []
-            for num, obj in enumerate(obj_list, 1):
-                print(f'#{num} : {obj}')
-                obj_nums.append(num)
-            while True:
-                try:
-                    i = int(input("Choose object number to remove and dispatch: "))
-                    if i not in obj_nums:
-                        raise WarehouseError("Such object does not exist, try again.")
-                except WarehouseError as err:
-                    print(err)
-                    continue
-                except ValueError:
-                    print("Not a number, try again.")
-                    continue
-                else:
-                    obj = warehouse.objects[i - 1]
-                    break
-            dept = input("Enter department name to dispatch equipment from the warehouse: ")
-            warehouse.pass_obj(obj, dept)
+            if len(warehouse.objects) > 0:
+                print("There are next items on the warehouse: ")
+                obj_list = [vars(obj) for obj in warehouse.objects]
+                obj_nums = []
+                for num, obj in enumerate(obj_list, 1):
+                    print(f'#{num} : {obj}')
+                    obj_nums.append(num)
+                while True:
+                    try:
+                        i = int(input("Choose object number to remove and dispatch: "))
+                        if i not in obj_nums:
+                            raise WarehouseError("Such object does not exist, try again.")
+                    except WarehouseError as err:
+                        print(err)
+                        continue
+                    except ValueError:
+                        print("Not a number, try again.")
+                        continue
+                    else:
+                        obj = warehouse.objects[i - 1]
+                        break
+                dept = input("Enter department name to dispatch equipment from the warehouse: ")
+                warehouse.pass_obj(obj, dept)
+            else:
+                print("This warehouse is empty!")
         elif action == 4:
             if warehouse.space_occupied > 0:
                 print("...Clearing warehouse...")
@@ -259,10 +272,10 @@ def action():
             else:
                 print("This warehouse is already empty, nothing to clear and destroy.")
         elif action == 5:
-            print("Thanks for visiting. Bye.")
+            print("Thanks for visiting the Warehouse Inc! Bye.")
             exit()
 
 
 if __name__ == '__main__':
-    print("Welcome to the Warehouse! What would you like to do today?\n")
+    print("Welcome to the Warehouse Inc! What would you like to do today?\n")
     action()
