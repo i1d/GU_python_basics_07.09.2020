@@ -184,87 +184,90 @@ def equipment_choice():
 
 def action():
     while True:
-        action = UI.warehouse_action()
-        if action == 0:
-            while True:
-                print("Trying to create a warehouse...")
+        try:
+            action = UI.warehouse_action()
+            if action == 0:
+                while True:
+                    print("Trying to create a warehouse...")
+                    try:
+                        wh_size = int(input("Enter warehouse size to create: "))
+                        if wh_size <= 0:
+                            raise WarehouseError("Warehouse size must be > 0. Try again.")
+                    except WarehouseError as err:
+                        print(err)
+                    except ValueError as err:
+                        print(f"Warehouse capacity size must be integer. Details: {err}.")
+                    else:
+                        warehouse = Warehouse(wh_size)
+                        print("Warehouse created!")
+                        break
+            elif action == 1:
                 try:
-                    wh_size = int(input("Enter warehouse size to create: "))
-      #              print(f"wh_size={wh_size}")
-                    if wh_size <= 0:
-                        raise WarehouseError("Warehouse size must be > 0. Try again.")
-                except WarehouseError as err:
-                    print(err)
-                except ValueError as err:
-                    print(f"Warehouse capacity size must be integer. Details: {err}.")
-                else:
-                    warehouse = Warehouse(wh_size)
-                    print("Warehouse created!")
-                    break
-        elif action == 1:
-            try:
-                obj_list = [obj.unit_name for obj in warehouse.objects]
-                print(f'Current warehouse state:\n'
-                      f'   Capacity={warehouse.capacity}\n'
-                      f'   Occupied space={warehouse.space_occupied}\n'
-                      f'   Objects={obj_list}')
-                if warehouse.space_occupied == 0:
-                    print(f"The warehouse is empty, let's put something in!")
-                elif warehouse.space_occupied == warehouse.capacity:
-                    print(f"The warehouse is full! Dispatch some item or even destroy anything!")
-            except UnboundLocalError:
-                print("Seems there are no warehouse yet. Let's go and create one!")
-        elif action == 2:
-            try:
-                print("Let's create an item and put it to the Warehouse!")
-                warehouse.put_obj(equipment_choice())
-            except UnboundLocalError:
-                print("Seems there are no warehouse yet. Let's go and create one!")
-            except AttributeError:
-                continue
-        elif action == 3:
-            try:
-                if len(warehouse.objects) > 0:
-                    print("There are next items on the warehouse: ")
-                    obj_list = [vars(obj) for obj in warehouse.objects]
-                    obj_nums = []
-                    for num, obj in enumerate(obj_list, 1):
-                        print(f'#{num} : {obj}')
-                        obj_nums.append(num)
-                    while True:
-                        try:
-                            i = int(input("Choose object number to remove and dispatch: "))
-                            if i not in obj_nums:
-                                raise WarehouseError("Such object does not exist, try again.")
-                        except WarehouseError as err:
-                            print(err)
-                            continue
-                        except ValueError:
-                            print("Not a number, try again.")
-                            continue
-                        else:
-                            obj = warehouse.objects[i - 1]
-                            break
-                    dept = input("Enter department name to dispatch equipment from the warehouse: ")
-                    warehouse.pass_obj(obj, dept)
-                else:
-                    print("This warehouse is empty!")
-            except UnboundLocalError:
-                print("Seems there are no warehouse yet. Let's go and create one!")
-        elif action == 4:
-            try:
-                if warehouse.space_occupied > 0:
-                    print("...Clearing warehouse...")
-                    print("...Destroying items...")
-                    warehouse.objects.clear()
-                    warehouse.space_occupied = 0
-                    print("...Done!")
-                else:
-                    print("This warehouse is already empty, nothing to clear and destroy.")
-            except UnboundLocalError:
-                print("Seems there are no warehouse yet. Let's go and create one!")
-        elif action == 5:
-            print("Thanks for visiting the Warehouse Inc! Bye.")
+                    obj_list = [obj.unit_name for obj in warehouse.objects]
+                    print(f'Current warehouse state:\n'
+                          f'   Capacity={warehouse.capacity}\n'
+                          f'   Occupied space={warehouse.space_occupied}\n'
+                          f'   Objects={obj_list}')
+                    if warehouse.space_occupied == 0:
+                        print(f"The warehouse is empty, let's put something in!")
+                    elif warehouse.space_occupied == warehouse.capacity:
+                        print(f"The warehouse is full! Dispatch some item or even destroy anything!")
+                except UnboundLocalError:
+                    print("Seems there are no warehouse yet. Let's go and create one!")
+            elif action == 2:
+                try:
+                    print("Let's create an item and put it to the Warehouse!")
+                    warehouse.put_obj(equipment_choice())
+                except UnboundLocalError:
+                    print("Seems there are no warehouse yet. Let's go and create one!")
+                except AttributeError:
+                    continue
+            elif action == 3:
+                try:
+                    if len(warehouse.objects) > 0:
+                        print("There are next items on the warehouse: ")
+                        obj_list = [vars(obj) for obj in warehouse.objects]
+                        obj_nums = []
+                        for num, obj in enumerate(obj_list, 1):
+                            print(f'#{num} : {obj}')
+                            obj_nums.append(num)
+                        while True:
+                            try:
+                                i = int(input("Choose object number to remove and dispatch: "))
+                                if i not in obj_nums:
+                                    raise WarehouseError("Such object does not exist, try again.")
+                            except WarehouseError as err:
+                                print(err)
+                                continue
+                            except ValueError:
+                                print("Not a number, try again.")
+                                continue
+                            else:
+                                obj = warehouse.objects[i - 1]
+                                break
+                        dept = input("Enter department name to dispatch equipment from the warehouse: ")
+                        warehouse.pass_obj(obj, dept)
+                    else:
+                        print("This warehouse is empty!")
+                except UnboundLocalError:
+                    print("Seems there are no warehouse yet. Let's go and create one!")
+            elif action == 4:
+                try:
+                    if warehouse.space_occupied > 0:
+                        print("...Clearing warehouse...")
+                        print("...Destroying items...")
+                        warehouse.objects.clear()
+                        warehouse.space_occupied = 0
+                        print("...Done!")
+                    else:
+                        print("This warehouse is already empty, nothing to clear and destroy.")
+                except UnboundLocalError:
+                    print("Seems there are no warehouse yet. Let's go and create one!")
+            elif action == 5:
+                print("Thanks for visiting the Warehouse Inc! Bye.")
+                exit()
+        except KeyboardInterrupt:
+            print("Sorry to hear that you would like to quit. Hope to see you another time in the Warehouse Inc! Bye.")
             exit()
 
 
