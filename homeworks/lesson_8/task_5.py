@@ -76,7 +76,6 @@ class UI:
             else:
                 return user_action
 
-
 class Warehouse(task_4.Warehouse):
     def __init__(self, capacity):
         super().__init__(capacity)
@@ -99,6 +98,47 @@ class Warehouse(task_4.Warehouse):
         # логируем в файл о переданном оборудовании
         log(f'{datetime.now()}. An object "{obj.unit_name}" has been moved to "{dept}" department.')
         print(f'..."{obj.unit_name}" removed successfully!')
+
+#    @staticmethod
+
+
+ #   @classmethod
+ #   def create_warehouse(cls, capacity):
+ #       return cls(Warehouse(capacity))
+
+  #  @classmethod
+ #   def check_warehouse(self):
+ #       print(f'Current warehouse condition: {vars(self)}')
+
+
+if __name__ == '_main__':  # make some tests here to check the objects
+    printer1 = task_4.Printer("a_printer", 10000.13, 2, 53.1, 100)
+    printer2 = task_4.Printer("a_2_printer", 200000, 10, 150, 200)
+    scanner1 = task_4.Scanner("a_scanner", 29999.99, 3, 89.9, 1200)
+    xerox1 = task_4.Xerox("a_xerox", 80000, 4, 125, 300, 1200, True)
+    #   print(vars(printer1))
+    #   print(vars(printer2))
+    #   print(vars(scanner1))
+    #   print(vars(xerox1))
+
+    warehouse = Warehouse(100)
+    print(f'Empty warehouse: {vars(warehouse)}')
+
+    warehouse.put_obj(printer1)
+    warehouse.put_obj(scanner1)
+    warehouse.put_obj(xerox1)
+    warehouse.put_obj(printer2)
+
+    print(f'Current warehouse condition: {vars(warehouse)}')
+
+    print(f'try to get an obj 1: {vars(warehouse[1])}')
+    print(f'Current warehouse condition: {vars(warehouse)}')
+    print("=" * 20)
+    print(f'warehouse objects: {warehouse.objects}.\ntype: {type(warehouse.objects)}')
+    print(f'removing of {printer2}...')
+    warehouse.pass_obj(printer2, "IT")
+    warehouse.pass_obj(printer1, "ADM")
+    print(f'Current warehouse condition: {vars(warehouse)}')
 
 
 def equipment_choice():
@@ -150,9 +190,18 @@ def equipment_choice():
         return eq
 
 
+#def object_choice():
+#    for obj, num in enumerate(warehouse.objects, 1):
+#        print(f'{num}:{obj}')
+#    i = int(input("choose object number: "))
+#    obj = warehouse.objects(i - 1)
+#    return obj
+
+
 def action():
     while True:
         action = UI.warehouse_action()
+
         if action == 0:
             try:
                 wh_size = int(input("Enter warehouse size to create: "))
@@ -177,6 +226,7 @@ def action():
             obj = warehouse.objects[i - 1]
             dept = input("Enter department name to dispatch equipment from the warehouse: ")
             warehouse.pass_obj(obj, dept)
+            #  remove_warehouse()
         elif action == 4:
             print("...Clearing warehouse...")
             print("...Destroying items...")
@@ -190,4 +240,8 @@ def action():
 
 if __name__ == '__main__':
     print("\nWelcome to the Warehouse! What would you like to do today?")
+  #  a = Warehouse.action()
     action()
+
+
+
