@@ -142,46 +142,26 @@ def equipment_choice():
     while True:
         act = UI.equipment_choice()
         if act == 1:  # выбираем принтер
-      #      while True:
-      #          try:
             name = str_inp_check("Enter printer name: ", 3)
-           #         if len(name) == 0:
-           #             raise WarehouseError("Name cannot be empty.")
             price = num_inp_check(float, "Enter printer price: ", 0)
-            #        if price < 0:
-            #            raise WarehouseError("Price cannot be < 0.")
             size = num_inp_check(int, "Enter printer size: ", 1)
-            #        if size <= 0:
-            #            raise WarehouseError("Size cannot be <= 0.")
             weight = num_inp_check(float, "Enter printer weight: ", 1)
-            #        if weight <= 0:
-            #            raise WarehouseError("Weight cannot be <= 0.")
             ppm = num_inp_check(int, "Enter printer PPM: ", 1)
-            #        if ppm <= 0:
-            #            raise WarehouseError("PPM cannot be <= 0.")
-            #    except WarehouseError as err:
-            #        print(err)
-            #        continue
-            #    except ValueError as err:
-            #        print(f"Value is wrong. Try again. Details: {err}")
-            #        continue
-            #    else:
             eq = task_4.Printer(name, price, size, weight, ppm)
-            #        break
         elif act == 2:  # выбираем сканер
-            name = input("Enter scanner name: ")
-            price = float(input("Enter scanner price: "))
-            size = int(input("Enter scanner size: "))
-            weight = float(input("Enter scanner weight: "))
-            dpi = int(input("Enter scanner DPI: "))
+            name = str_inp_check("Enter scanner name: ", 3)
+            price = num_inp_check(float, "Enter scanner price: ", 0)
+            size = num_inp_check(int, "Enter scanner size: ", 1)
+            weight = num_inp_check(float, "Enter scanner weight: ", 1)
+            dpi = num_inp_check(int, "Enter scanner DPI: ", 1)
             eq = task_4.Scanner(name, price, size, weight, dpi)
         elif act == 3:  # выбираем ксерокс
-            name = input("Enter xerox name: ")
-            price = float(input("Enter xerox price: "))
-            size = int(input("Enter xerox size: "))
-            weight = float(input("Enter xerox weight: "))
-            ppm = int(input("Enter xerox PPM: "))
-            dpi = int(input("Enter xerox DPI: "))
+            name = str_inp_check("Enter xerox name: ", 3)
+            price = num_inp_check(float, "Enter xerox price: ", 0)
+            size = num_inp_check(int, "Enter xerox size: ", 1)
+            weight = num_inp_check(float, "Enter xerox weight: ", 1)
+            ppm = num_inp_check(int, "Enter xerox PPM: ", 1)
+            dpi = num_inp_check(int, "Enter xerox DPI: ", 1)
             b = "n"
             while True:
                 try:
@@ -230,47 +210,58 @@ def action():
                       f'   Occupied space={warehouse.space_occupied}\n'
                       f'   Objects={obj_list}')
                 if warehouse.space_occupied == 0:
-                    print(f"Seems warehouse is empty, let's put something in!")
+                    print(f"The warehouse is empty, let's put something in!")
+                elif warehouse.space_occupied == warehouse.capacity:
+                    print(f"The warehouse is full! Dispatch some item or even destroy anything!")
             except UnboundLocalError:
                 print("Seems there are no warehouse yet. Let's go and create one!")
         elif action == 2:
-            print("Let's create an item and put it to the Warehouse!")
-            warehouse.put_obj(equipment_choice())
+            try:
+                print("Let's create an item and put it to the Warehouse!")
+                warehouse.put_obj(equipment_choice())
+            except UnboundLocalError:
+                print("Seems there are no warehouse yet. Let's go and create one!")
         elif action == 3:
-            if len(warehouse.objects) > 0:
-                print("There are next items on the warehouse: ")
-                obj_list = [vars(obj) for obj in warehouse.objects]
-                obj_nums = []
-                for num, obj in enumerate(obj_list, 1):
-                    print(f'#{num} : {obj}')
-                    obj_nums.append(num)
-                while True:
-                    try:
-                        i = int(input("Choose object number to remove and dispatch: "))
-                        if i not in obj_nums:
-                            raise WarehouseError("Such object does not exist, try again.")
-                    except WarehouseError as err:
-                        print(err)
-                        continue
-                    except ValueError:
-                        print("Not a number, try again.")
-                        continue
-                    else:
-                        obj = warehouse.objects[i - 1]
-                        break
-                dept = input("Enter department name to dispatch equipment from the warehouse: ")
-                warehouse.pass_obj(obj, dept)
-            else:
-                print("This warehouse is empty!")
+            try:
+                if len(warehouse.objects) > 0:
+                    print("There are next items on the warehouse: ")
+                    obj_list = [vars(obj) for obj in warehouse.objects]
+                    obj_nums = []
+                    for num, obj in enumerate(obj_list, 1):
+                        print(f'#{num} : {obj}')
+                        obj_nums.append(num)
+                    while True:
+                        try:
+                            i = int(input("Choose object number to remove and dispatch: "))
+                            if i not in obj_nums:
+                                raise WarehouseError("Such object does not exist, try again.")
+                        except WarehouseError as err:
+                            print(err)
+                            continue
+                        except ValueError:
+                            print("Not a number, try again.")
+                            continue
+                        else:
+                            obj = warehouse.objects[i - 1]
+                            break
+                    dept = input("Enter department name to dispatch equipment from the warehouse: ")
+                    warehouse.pass_obj(obj, dept)
+                else:
+                    print("This warehouse is empty!")
+            except UnboundLocalError:
+                print("Seems there are no warehouse yet. Let's go and create one!")
         elif action == 4:
-            if warehouse.space_occupied > 0:
-                print("...Clearing warehouse...")
-                print("...Destroying items...")
-                warehouse.objects.clear()
-                warehouse.space_occupied = 0
-                print("...Done!")
-            else:
-                print("This warehouse is already empty, nothing to clear and destroy.")
+            try:
+                if warehouse.space_occupied > 0:
+                    print("...Clearing warehouse...")
+                    print("...Destroying items...")
+                    warehouse.objects.clear()
+                    warehouse.space_occupied = 0
+                    print("...Done!")
+                else:
+                    print("This warehouse is already empty, nothing to clear and destroy.")
+            except UnboundLocalError:
+                print("Seems there are no warehouse yet. Let's go and create one!")
         elif action == 5:
             print("Thanks for visiting the Warehouse Inc! Bye.")
             exit()
