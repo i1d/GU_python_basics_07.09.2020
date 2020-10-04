@@ -147,14 +147,14 @@ def equipment_choice():
             size = num_inp_check(int, "Enter printer size: ", 1)
             weight = num_inp_check(float, "Enter printer weight: ", 1)
             ppm = num_inp_check(int, "Enter printer PPM: ", 1)
-            eq = task_4.Printer(name, price, size, weight, ppm)
+            return task_4.Printer(name, price, size, weight, ppm)
         elif act == 2:  # выбираем сканер
             name = str_inp_check("Enter scanner name: ", 3)
             price = num_inp_check(float, "Enter scanner price: ", 0)
             size = num_inp_check(int, "Enter scanner size: ", 1)
             weight = num_inp_check(float, "Enter scanner weight: ", 1)
             dpi = num_inp_check(int, "Enter scanner DPI: ", 1)
-            eq = task_4.Scanner(name, price, size, weight, dpi)
+            return task_4.Scanner(name, price, size, weight, dpi)
         elif act == 3:  # выбираем ксерокс
             name = str_inp_check("Enter xerox name: ", 3)
             price = num_inp_check(float, "Enter xerox price: ", 0)
@@ -177,10 +177,9 @@ def equipment_choice():
                 brochure = False
             elif b == "y":
                 brochure = True
-            eq = task_4.Xerox(name, price, size, weight, ppm, dpi, brochure)
+            return task_4.Xerox(name, price, size, weight, ppm, dpi, brochure)
         elif act == 5:
             break
-        return eq
 
 
 def action():
@@ -221,6 +220,8 @@ def action():
                 warehouse.put_obj(equipment_choice())
             except UnboundLocalError:
                 print("Seems there are no warehouse yet. Let's go and create one!")
+            except AttributeError:
+                continue
         elif action == 3:
             try:
                 if len(warehouse.objects) > 0:
