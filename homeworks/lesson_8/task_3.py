@@ -67,3 +67,4 @@ while True:
             raise NumberError(f"This is not a number. This is {type(inp)}.")
     except NumberError as err:
         print(f"{err} Our list: {lst}.")
+        continue  # работает и без него почему-то
